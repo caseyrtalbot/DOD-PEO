@@ -1875,11 +1875,11 @@
   // SERVICE COLORS MAP
   // ============================================================
   const SERVICE_COLORS = {
-    navy: "#4488cc",
-    army: "#88aa44",
-    airforce: "#6688dd",
-    spaceforce: "#aaaacc",
-    defensewide: "#ccaa44"
+    navy: "#1199ff",
+    army: "#33cc66",
+    airforce: "#5588dd",
+    spaceforce: "#8877dd",
+    defensewide: "#ddaa33"
   };
 
   const SERVICE_LABELS = {
@@ -2014,7 +2014,7 @@
       const w26 = (d.fy26 / max * 100).toFixed(1);
       const w25 = (d.fy25 / max * 100).toFixed(1);
       return `<div class="bar-chart__row">
-        <span class="bar-chart__label">${d.label}</span>
+        <span class="bar-chart__label" style="color:${d.color}">${d.label}</span>
         <span class="bar-chart__track">
           <span class="bar-chart__compare" style="width:${w25}%;border-color:${d.color}"></span>
           <span class="bar-chart__fill" style="width:${w26}%;background:${d.color}"></span>
@@ -2022,8 +2022,9 @@
         <span class="bar-chart__value">$${d.fy26}B</span>
       </div>`;
     }).join("")}</div>
-    <div style="font-size:9px;color:#555;margin-top:4px;text-transform:uppercase;letter-spacing:0.04em">
-      SOLID = FY26 │ OUTLINE = FY25
+    <div class="chart-legend">
+      <span class="chart-legend__item"><span class="chart-legend__swatch" style="background:${SERVICE_COLORS.navy}"></span>SOLID = FY26</span>
+      <span class="chart-legend__item"><span class="chart-legend__swatch" style="background:transparent;border:1px solid ${SERVICE_COLORS.navy}"></span>OUTLINE = FY25</span>
     </div>`;
   }
 
@@ -2048,7 +2049,7 @@
       const wRecon = (recon / max * 100).toFixed(1);
       const color = colorMap[d.service] || "#888";
       return `<div class="bar-chart__row">
-        <span class="bar-chart__label">${d.service.toUpperCase()}</span>
+        <span class="bar-chart__label" style="color:${color}">${d.service.toUpperCase()}</span>
         <span class="stacked-bar__track">
           <span class="stacked-bar__segment" style="width:${wBase}%;background:${color}"></span>
           <span class="stacked-bar__segment stacked-bar__segment--hatched" style="width:${wRecon}%;background:${color}"></span>
@@ -2056,8 +2057,9 @@
         <span class="bar-chart__value">$${total.toFixed(1)}B</span>
       </div>`;
     }).join("")}</div>
-    <div style="font-size:9px;color:#555;margin-top:4px;text-transform:uppercase;letter-spacing:0.04em">
-      SOLID = BASE BUDGET │ HATCHED = RECONCILIATION
+    <div class="chart-legend">
+      <span class="chart-legend__item"><span class="chart-legend__swatch" style="background:${SERVICE_COLORS.navy}"></span>BASE BUDGET</span>
+      <span class="chart-legend__item"><span class="chart-legend__swatch chart-legend__swatch--hatched" style="background:${SERVICE_COLORS.navy}"></span>RECONCILIATION</span>
     </div>`;
   }
 
@@ -2071,9 +2073,9 @@
       {name:"ARMY",value:197.4,color:SERVICE_COLORS.army},
       {name:"DEFENSE-WIDE",value:170.9,color:SERVICE_COLORS.defensewide},
       {name:"SPACE FORCE",value:39.9,color:SERVICE_COLORS.spaceforce},
-      {name:"MDA",value:13.2,color:"#cc6644"},
-      {name:"DARPA",value:4.9,color:"#8866aa"},
-      {name:"SOCOM",value:2.3,color:"#669966"}
+      {name:"MDA",value:13.2,color:"#dd7744"},
+      {name:"DARPA",value:4.9,color:"#aa77dd"},
+      {name:"SOCOM",value:2.3,color:"#44bb88"}
     ];
     const total = items.reduce((s, i) => s + i.value, 0);
     // Use a CSS grid with column spans proportional to value
@@ -2089,8 +2091,10 @@
       <div class="treemap__cell" style="grid-column:span 3;background:${items[6].color}33;border-color:${items[6].color}55"><span class="treemap__cell-name">${items[6].name}</span><span class="treemap__cell-value">$${items[6].value}B</span></div>
       <div class="treemap__cell" style="grid-column:span 2;background:${items[7].color}33;border-color:${items[7].color}55"><span class="treemap__cell-name">${items[7].name}</span><span class="treemap__cell-value">$${items[7].value}B</span></div>
     </div>
-    <div style="font-size:9px;color:#555;margin-top:4px;text-transform:uppercase;letter-spacing:0.04em">
-      FY2026 BUDGET ALLOCATION │ AREA ∝ BUDGET SIZE │ TOTAL: $961.6B
+    <div class="chart-legend">
+      <span class="chart-legend__item">FY2026 BUDGET ALLOCATION</span>
+      <span class="chart-legend__item">AREA ∝ BUDGET SIZE</span>
+      <span class="chart-legend__item">TOTAL: $961.6B</span>
     </div>`;
   }
 

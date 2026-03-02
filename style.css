@@ -79,17 +79,19 @@ a { color: inherit; text-decoration: none; }
   --amber-dim: #cc7000;
   --amber-bright: #ffaa33;
 
-  /* Service accent colors — terminal-style */
-  --navy: #1a3355;
-  --navy-text: #4488cc;
-  --army: #334411;
-  --army-text: #88aa44;
-  --airforce: #1a2255;
-  --airforce-text: #6688dd;
-  --spaceforce: #222233;
-  --spaceforce-text: #aaaacc;
-  --defensewide: #332a11;
-  --defensewide-text: #ccaa44;
+  /* Service accent colors — Bloomberg terminal palette
+     Each service gets a saturated primary + dark bg tint.
+     Colors chosen for max distinguishability on #000. */
+  --navy: #0a1e33;
+  --navy-text: #1199ff;
+  --army: #0f2a11;
+  --army-text: #33cc66;
+  --airforce: #111833;
+  --airforce-text: #5588dd;
+  --spaceforce: #16132e;
+  --spaceforce-text: #8877dd;
+  --defensewide: #2a2210;
+  --defensewide-text: #ddaa33;
 
   /* Semantic */
   --up: #00c853;
@@ -418,9 +420,11 @@ a { color: inherit; text-decoration: none; }
 .section__header {
   padding: var(--sp-2) var(--sp-3);
   border-bottom: 1px solid var(--border);
+  border-top: 2px solid var(--amber);
   display: flex;
   align-items: center;
   gap: var(--sp-2);
+  background: linear-gradient(180deg, rgba(255,140,0,0.04) 0%, transparent 100%);
 }
 .section__title {
   font-size: var(--text-sm);
@@ -655,6 +659,10 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface-2);
   position: relative;
   overflow: hidden;
+  /* Bloomberg-style subtle grid lines */
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 25% 100%;
 }
 .bar-chart__fill {
   height: 100%;
@@ -662,6 +670,14 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   left: 0;
   transition: width 0.5s var(--ease);
+  /* Bloomberg glow on hover */
+  filter: brightness(1);
+}
+.bar-chart__row:hover .bar-chart__fill {
+  filter: brightness(1.25);
+}
+.bar-chart__row:hover .bar-chart__label {
+  color: var(--text-bright);
 }
 .bar-chart__compare {
   height: 100%;
@@ -689,6 +705,9 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   overflow: hidden;
   display: flex;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 25% 100%;
 }
 .stacked-bar__segment {
   height: 100%;
@@ -720,6 +739,11 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   overflow: hidden;
   min-height: 40px;
+  transition: filter var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.treemap__cell:hover {
+  filter: brightness(1.3);
+  border-color: rgba(255,255,255,0.2);
 }
 .treemap__cell-name {
   font-size: 9px;
@@ -736,6 +760,43 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--text-xs);
   font-weight: 500;
   color: var(--text);
+}
+
+/* Chart legend / annotations — Bloomberg style */
+.chart-legend {
+  font-size: 9px;
+  color: var(--text-faint);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 0;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.chart-legend__swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.chart-legend__swatch--hatched {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.5) 2px,
+    rgba(0,0,0,0.5) 4px
+  );
+}
+.chart-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
 }
 
 /* Priorities list */
