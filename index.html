@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoD PEO Common Operating Picture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- TICKER BAR -->
+    <div class="ticker-bar" id="tickerBar" role="marquee" aria-label="Key budget figures">
+      <div class="ticker-bar__content" id="tickerContent"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="header__left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="header__logo">
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="24" height="24" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 14h14M14 7v14" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+            <rect x="10" y="10" width="8" height="8" stroke="#ff8c00" stroke-width="1.5"/>
+          </svg>
+          <h1 class="header__title">DOD PEO <span class="header__title-accent">COP</span></h1>
+        </div>
+      </div>
+      <div class="header__right">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="search" class="search-input" placeholder="SEARCH PEOS, PROGRAMS..." aria-label="Search">
+          <kbd class="search-kbd">/</kbd>
+        </div>
+      </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Service branch navigation">
+      <nav class="sidebar__nav">
+        <ul class="sidebar__list" role="tree">
+          <li class="sidebar__branch" data-branch="overview">
+            <button class="sidebar__branch-btn sidebar__branch-btn--active" data-target="overview" role="treeitem" aria-expanded="false">
+              <svg class="sidebar__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              BUDGET OVERVIEW
+            </button>
+          </li>
+          <li class="sidebar__branch" data-branch="navy">
+            <button class="sidebar__branch-btn" data-target="navy" role="treeitem" aria-expanded="false">
+              <span class="sidebar__dot sidebar__dot--navy"></span>
+              NAVY
+              <span class="sidebar__badge-count" id="badge-navy"></span>
+              <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="sidebar__children" id="navy-children" role="group"></ul>
+          </li>
+          <li class="sidebar__branch" data-branch="army">
+            <button class="sidebar__branch-btn" data-target="army" role="treeitem" aria-expanded="false">
+              <span class="sidebar__dot sidebar__dot--army"></span>
+              ARMY
+              <span class="sidebar__badge-count" id="badge-army"></span>
+              <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="sidebar__children" id="army-children" role="group"></ul>
+          </li>
+          <li class="sidebar__branch" data-branch="airforce">
+            <button class="sidebar__branch-btn" data-target="airforce" role="treeitem" aria-expanded="false">
+              <span class="sidebar__dot sidebar__dot--airforce"></span>
+              AIR FORCE
+              <span class="sidebar__badge-count" id="badge-airforce"></span>
+              <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="sidebar__children" id="airforce-children" role="group"></ul>
+          </li>
+          <li class="sidebar__branch" data-branch="spaceforce">
+            <button class="sidebar__branch-btn" data-target="spaceforce" role="treeitem" aria-expanded="false">
+              <span class="sidebar__dot sidebar__dot--spaceforce"></span>
+              SPACE FORCE
+              <span class="sidebar__badge-count" id="badge-spaceforce"></span>
+              <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="sidebar__children" id="spaceforce-children" role="group"></ul>
+          </li>
+          <li class="sidebar__branch" data-branch="defensewide">
+            <button class="sidebar__branch-btn" data-target="defensewide" role="treeitem" aria-expanded="false">
+              <span class="sidebar__dot sidebar__dot--defensewide"></span>
+              DEFENSE-WIDE
+              <span class="sidebar__badge-count" id="badge-defensewide"></span>
+              <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="sidebar__children" id="defensewide-children" role="group"></ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar__footer">
+        <span>UPDATED: MAR 2026</span>
+      </div>
+    </aside>
+
+    <!-- OVERLAY for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main" id="main" role="main">
+      <!-- KPI STRIP -->
+      <div class="kpi-strip" id="kpiStrip">
+        <div class="kpi-card">
+          <div class="kpi-card__label">TOTAL DOD FY2026</div>
+          <div class="kpi-card__value">$961.6B</div>
+          <div class="kpi-card__sub">$848.3B BASE + $113.3B RECONCILIATION</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">TOTAL RDT&amp;E</div>
+          <div class="kpi-card__value">$179.1B</div>
+          <div class="kpi-card__sub kpi-card__sub--up">&#9650; +27% VS FY25</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">TOTAL PROCUREMENT</div>
+          <div class="kpi-card__value">~$205B</div>
+          <div class="kpi-card__sub">$153.3B BASE + ~$52B RECONCILIATION</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">PEOS TRACKED</div>
+          <div class="kpi-card__value">52+</div>
+          <div class="kpi-card__sub">ACROSS ALL SERVICES</div>
+        </div>
+        <a class="kpi-card kpi-card--link" href="https://comptroller.defense.gov/Budget-Materials/" target="_blank" rel="noopener noreferrer">
+          <div class="kpi-card__label">BUDGET PORTAL</div>
+          <div class="kpi-card__value kpi-card__value--link">comptroller.defense.gov
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </div>
+          <div class="kpi-card__sub">OFFICIAL FY2026 DOCUMENTS</div>
+        </a>
+      </div>
+
+      <!-- CONTENT AREA (dynamically rendered) -->
+      <div class="content" id="content">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer__sources">
+          <strong>DATA SOURCES:</strong> DoD Comptroller (comptroller.defense.gov), NAVSEA, NAVAIR, NAVWAR, PEO C4I, SSP, AFLCMC, SSC, SDA, Army ASA(ALT), DARPA, MDA, SOCOM, DHA, DLA, CRS Reports, USNI News, Defense News, Breaking Defense, Air &amp; Space Forces Magazine.
+        </div>
+        <div class="footer__disclaimer">
+          Budget figures are nominal FY2026 dollars from official budget submissions. Organizational structures reflect March 2026 status; acquisition reform may have altered some reporting chains. This dashboard is for reference purposes only and does not represent official DoD policy.
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- SEARCH RESULTS OVERLAY -->
+  <div class="search-results" id="searchResults" hidden>
+    <div class="search-results__inner" id="searchResultsInner"></div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
